@@ -5,96 +5,86 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
-<h:head>
-	<title>Sistema de Notas Fiscais</title>
-	<h:outputScript name="jsf.js" library="javax.faces" target="head"/>
-	<h:outputStylesheet name="app.css" library="css"/>
-</h:head>
 
-<h:body>
+
+
+	<ui:composition template="/WEB-INF/templates/_template2.xhtml">
+		<ui:define name="titulo">Manter Produtos</ui:define>
 	
-	<div id="logotipo">
-		<h:graphicImage styleClass="logo" library="imagens" name="logo.png"/>
-		<span>UBERDIST</span>
-	</div>
-	
-	<div id="conteudo">
+		<ui:define name="corpo">
 		
-		<fieldset class="f">
-		
-			<legend class="t">
-				<h:outputText value="Novo Produto" rendered="#{empty produtoBean.produto.id}"/>
-				<h:outputText value="Editar Produto" rendered="#{not empty produtoBean.produto.id}"/>	
-			</legend>
-	
-			<h:form id="form1">
+			<fieldset class="f">
 			
-				<h:panelGrid columns="2">
-					
-					<h:outputLabel value="Nome:" for="nome"/>
-					<h:inputText id="nome" value="#{produtoBean.produto.nome}"/>
-					
-					<h:outputLabel value="Descrição:" for="descricao"/>
-					<h:inputTextarea id="descricao" value="#{produtoBean.produto.descricao}"/>
-					
-					<h:outputLabel value="Preço:" for="preco"/>
-					<h:inputText id="preco" value="#{produtoBean.produto.preco}"/>
-					
-					<h:commandButton action="#{produtoBean.grava}" value="Gravar">
-						<f:ajax execute="@form" render="@form :lista"/>
-					</h:commandButton>
-					
-				</h:panelGrid>
+				<legend class="t">
+					<h:outputText value="Novo Produto" rendered="#{empty produtoBean.produto.id}"/>
+					<h:outputText value="Editar Produto" rendered="#{not empty produtoBean.produto.id}"/>	
+				</legend>
+		
+				<h:form id="form1">
 				
+					<h:panelGrid columns="2">
+						
+						<h:outputLabel value="Nome:" for="nome"/>
+						<h:inputText id="nome" value="#{produtoBean.produto.nome}"/>
+						
+						<h:outputLabel value="Descrição:" for="descricao"/>
+						<h:inputTextarea id="descricao" value="#{produtoBean.produto.descricao}"/>
+						
+						<h:outputLabel value="Preço:" for="preco"/>
+						<h:inputText id="preco" value="#{produtoBean.produto.preco}"/>
+						
+						<h:commandButton action="#{produtoBean.grava}" value="Gravar">
+							<f:ajax execute="@form" render="@form :lista"/>
+						</h:commandButton>
+						
+					</h:panelGrid>
+					
+				</h:form>
+			</fieldset>
+			
+			<h3 class="t">Lista de Produtos</h3>
+			
+			<h:form id="lista">
+				<h:dataTable value="#{produtoBean.produtos}" styleClass="prod" var="produto" rowClasses="par, impar">
+					
+					<h:column>
+						<f:facet name="header">Id</f:facet>
+						#{produto.id}
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Nome</f:facet>
+						#{produto.nome}
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Descrição</f:facet>
+						#{produto.descricao}
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Preço</f:facet>
+						#{produto.preco}
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Ações</f:facet>
+						<h:commandLink action="#{produtoBean.remove(produto)}" value="Remover"><f:ajax render="@form" /></h:commandLink>
+					</h:column>
+					
+					<h:column>
+						<f:ajax render=":form1">
+							<h:commandLink value="Alterar">
+								<f:setPropertyActionListener value="#{produto}" target="#{produtoBean.produto}"/>
+							</h:commandLink>
+						</f:ajax> 
+					</h:column>
+				
+				</h:dataTable>
 			</h:form>
-		</fieldset>
-		
-		<h3 class="t">Lista de Produtos</h3>
-		
-		<h:form id="lista">
-			<h:dataTable value="#{produtoBean.produtos}" styleClass="prod" var="produto" rowClasses="par, impar">
-				
-				<h:column>
-					<f:facet name="header">Id</f:facet>
-					#{produto.id}
-				</h:column>
-				
-				<h:column>
-					<f:facet name="header">Nome</f:facet>
-					#{produto.nome}
-				</h:column>
-				
-				<h:column>
-					<f:facet name="header">Descrição</f:facet>
-					#{produto.descricao}
-				</h:column>
-				
-				<h:column>
-					<f:facet name="header">Preço</f:facet>
-					#{produto.preco}
-				</h:column>
-				
-				<h:column>
-					<f:facet name="header">Ações</f:facet>
-					<h:commandLink action="#{produtoBean.remove(produto)}" value="Remover"><f:ajax render="@form" /></h:commandLink>
-				</h:column>
-				
-				<h:column>
-					<f:ajax render=":form1">
-						<h:commandLink value="Alterar">
-							<f:setPropertyActionListener value="#{produto}" target="#{produtoBean.produto}"/>
-						</h:commandLink>
-					</f:ajax> 
-				</h:column>
 			
-			</h:dataTable>
-		</h:form>
-	</div>
+		</ui:define>
+	</ui:composition>
 	
-	<div class="rodape">
-		Uberdist © 2014
-	</div>
-	
-</h:body>
 
 </html>

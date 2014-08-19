@@ -6,32 +6,27 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-<h:head>
-	<title>Login</title>
-	<h:outputScript name="jsf.js" library="javax.faces" target="head"/>
-	<h:outputStylesheet name="app.css" library="css"/>
-</h:head>
-
-<h:body styleClass="b1">
-	<div id="logotipo">
-		<h:graphicImage styleClass="logo" library="imagens" name="logo.png"/>
-		<span>UBERDIST</span>
-	</div>
-<center>
-
-	<h:form id="formlogin">
-		<h:panelGrid columns="2" styleClass="f2">
-			<h:outputLabel value="Login:"/>
-			<h:inputText value="#{loginBean.usuario.login}"/>
-			
-			<h:outputLabel value="Senha:"/>
-			<h:inputSecret value="#{loginBean.usuario.senha}"/>
-			
-			<h:commandButton value="Efetuar Login" action="#{loginBean.autentica}"/>
-			
-		</h:panelGrid>
-	</h:form>
+<h:body>
 	
-</center>
+	
+	<ui:composition template="/WEB-INF/templates/_template.xhtml">
+		<ui:define name="corpo">
+		<center>
+			<h:form id="formlogin">
+				<h:panelGrid columns="2" styleClass="f2">
+					<h:outputLabel value="Login:"/>
+					<h:inputText value="#{loginBean.usuario.login}"/>
+					
+					<h:outputLabel value="Senha:"/>
+					<h:inputSecret value="#{loginBean.usuario.senha}"/>
+					
+					<h:commandButton value="Efetuar Login" action="#{loginBean.autentica}"/>
+					
+				</h:panelGrid>
+			</h:form>
+		</center>
+		</ui:define>
+	</ui:composition>
+
 </h:body>
 </html>

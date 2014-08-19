@@ -53,5 +53,9 @@ public class ProdutoBean {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
+	
+	public String page() {
+		return "index?faces-redirect=true";
+	}
 
 }

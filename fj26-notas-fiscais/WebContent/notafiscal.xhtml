@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/_template2.xhtml">
+	<ui:define name="titulo">
+	    Manter Vendas
+	</ui:define>
+	
+	<ui:define name="corpo">
+		
+		<!-- Cabeçalho Nota Fiscal -->
+		<fieldset class="f">
+			<legend class="t">Dados da Nota</legend>
+			<h:panelGrid columns="2">
+				
+				<h:outputLabel value="CNPJ Cliente:"/>
+				<h:inputText value="#{notaFiscalBean.notaFiscal.cnpj}"/>
+				
+				<h:outputLabel value="Data:"/>
+				<h:inputText value="#{notaFiscalBean.notaFiscal.data.time}">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+				</h:inputText>
+				
+				</h:panelGrid>
+		</fieldset>
+			
+		
+		
+		<!-- Dados do Item -->
+		<fieldset class="f">
+			<legend class="t">Dados do Item</legend>
+			
+			<h:panelGrid columns="2">
+				
+				<h:outputLabel value="Produto:"/>
+				<h:selectOneMenu value="#{notaFiscalBean.idProduto}">
+					<f:selectItems value="#{produtoBean.produtos}" var="produto" itemValue="#{produto.id}" itemLabel="#{produto.nome}"/>
+				</h:selectOneMenu>
+				
+				<h:outputLabel value="Quantidade:"/>
+				<h:inputText value="#{notaFiscalBean.item.quantidade}">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+				</h:inputText>
+				
+				<f:ajax  render=":tabela">
+					<h:commandButton action="#{notaFiscalBean.guardaItem}" value="Guarda Item"/>
+				</f:ajax>
+				
+			</h:panelGrid>
+			
+		</fieldset>
+		
+		<h:dataTable id="tabela" value="#{notaFiscalBean.notaFiscal.itens}" var="item" styleClass="prod" rowClasses="par,impar">
+			<h:column>
+				<f:facet name="header">Produto</f:facet>
+				#{item.produto.nome}
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Preço</f:facet>
+				<h:outputText value="#{item.valorUnitario}">
+					<f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR"/>
+				</h:outputText>	
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Quantidade</f:facet>
+				#{item.quantidade}
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">valor</f:facet>
+				
+				<h:outputText value="#{item.total}">
+					<f:convertNumber type="currency" currencySymbol="R$" locale="pt_BR"/>
+				</h:outputText>
+			</h:column>
+		</h:dataTable>
+		
+		<h:commandButton value="Gravar" action="#{notaFiscalBean.adiciona}" />
+		
+	</ui:define>
+	
+</ui:composition>
+</html>

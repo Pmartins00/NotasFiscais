@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	
+	<title><ui:insert name="titulo">Sistema de Notas Fiscais</ui:insert></title>
+	<h:outputScript name="jsf.js" library="javax.faces" target="head"/>
+	<h:outputStylesheet name="app.css" library="css"/>
+	
+</h:head>
+
+<h:body>
+	
+	<div id="logotipo">
+		<h:graphicImage styleClass="logo" library="imagens" name="logo.png"/>
+		<span>UBERDIST</span>
+		<span class="b1">Logado como: #{loginBean.usuario.login}</span>
+		<h:form>
+			<h:commandButton styleClass="menu" value="Logout" action="#{loginBean.logout}"/>
+			<h:commandButton styleClass="menu" value="Manter Usuários" action="#{usuarioBean.page}"/>
+			<h:commandButton styleClass="menu" value="Manter Notas Fiscais" action="#{notaFiscalBean.page}"/>
+			<h:commandButton styleClass="menu" value="Manter Produtos" action="#{produtoBean.page}"/>
+		</h:form>
+	</div>
+	
+	<div id="conteudo">
+		<ui:insert name="corpo"/>
+	</div>
+	
+	<div class="rodape">
+		Uberdist © 2014
+	</div>
+
+</h:body>
+</html>

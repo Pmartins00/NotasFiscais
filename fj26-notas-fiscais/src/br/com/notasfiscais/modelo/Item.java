@@ -20,6 +20,10 @@ public class Item {
 	private Integer quantidade;
 	
 	private Double valorUnitario;
+	
+	public Double total() {
+		return valorUnitario * quantidade;
+	}
 
 	public Long getId() {
 		return id;

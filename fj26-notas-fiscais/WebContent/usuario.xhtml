@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+
+	<ui:composition template="/WEB-INF/templates/_template2.xhtml">
+		<ui:define name="titulo">Manter Usuários</ui:define>
+		
+		<ui:define name="corpo">
+		
+			<fieldset class="f">
+		
+				<legend class="t">
+					<h:outputText value="Novo Usuário" rendered="#{empty produtoBean.produto.id}"/>
+					<h:outputText value="Editar Usuário" rendered="#{not empty produtoBean.produto.id}"/>	
+				</legend>
+		
+				<h:form id="form1">
+				
+					<h:panelGrid columns="2">
+						
+						<h:outputLabel value="Login:" for="login"/>
+						<h:inputText id="login" value="#{usuarioBean.usuario.login}"/>
+						
+						<h:outputLabel value="Senha:" for="senha"/>
+						<h:inputTextarea id="senha" value="#{usuarioBean.usuario.senha}"/>
+						
+						<h:commandButton action="#{usuarioBean.grava}" value="Gravar">
+							<f:ajax execute="@form" render="@form :lista"/>
+						</h:commandButton>
+						
+					</h:panelGrid>
+					
+				</h:form>
+			</fieldset>
+			
+			<h3 class="t">Lista de Usuários</h3>
+			
+			<h:form id="lista">
+				<h:dataTable value="#{usuarioBean.usuarios}" styleClass="prod" var="usuario" rowClasses="par, impar">
+					
+					<h:column>
+						<f:facet name="header">Id</f:facet>
+						#{usuario.id}
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Login</f:facet>
+						#{usuario.login}
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Senha</f:facet>
+						#{usuario.senha}
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Ações</f:facet>
+						<h:commandLink action="#{usuarioBean.remove(usuario)}" value="Remover"><f:ajax render="@form" /></h:commandLink>
+					</h:column>
+					
+					<h:column>
+						<f:ajax render=":form1">
+							<h:commandLink value="Alterar">
+								<f:setPropertyActionListener value="#{usuario}" target="#{usuarioBean.usuario}"/>
+							</h:commandLink>
+						</f:ajax> 
+					</h:column>
+				
+				</h:dataTable>
+			</h:form>
+			
+		</ui:define>
+	</ui:composition>	
+	
+
+</html>
