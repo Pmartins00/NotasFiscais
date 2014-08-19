@@ -9,7 +9,7 @@ import br.com.notasfiscais.dao.DAO;
 import br.com.notasfiscais.modelo.Produto;
 
 @ViewScoped
-@ManagedBean
+@ManagedBean(name="produtoBean")
 public class ProdutoBean {
 	
 	private Produto produto = new Produto();
@@ -17,7 +17,16 @@ public class ProdutoBean {
 	
 	public void grava() {
 		DAO<Produto> dao = new DAO<Produto>(Produto.class);
-		dao.adiciona(produto);
+		
+		System.out.println(produto.getId());
+		if (this.produto.getId() == null) {
+			System.out.println("Adicionando");
+			dao.adiciona(produto);
+		} else {
+			System.out.println("Atualizando");
+			dao.atualiza(produto);
+		}
+		
 		this.produto = new Produto();
 		this.produtos = dao.listaTodos();
 	}
@@ -39,6 +48,10 @@ public class ProdutoBean {
 	
 	public Produto getProduto() {
 		return this.produto;
+	}
+	
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 
 }

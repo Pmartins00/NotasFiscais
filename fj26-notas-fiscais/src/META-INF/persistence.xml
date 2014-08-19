@@ -10,6 +10,7 @@ version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
 	<class>br.com.notasfiscais.modelo.Item</class>
 	<class>br.com.notasfiscais.modelo.NotaFiscal</class>
 	<class>br.com.notasfiscais.modelo.Produto</class> 
+	<class>br.com.notasfiscais.modelo.Usuario</class>
 
 	<properties> 
 		

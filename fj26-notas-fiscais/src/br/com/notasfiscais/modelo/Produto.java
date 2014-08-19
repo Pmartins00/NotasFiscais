@@ -14,7 +14,7 @@ public class Produto {
 	
 	private String descricao;
 	
-	private String preco;
+	private Double preco;
 
 	public Long getId() {
 		return id;
@@ -40,11 +40,11 @@ public class Produto {
 		this.descricao = descricao;
 	}
 
-	public String getPreco() {
+	public Double getPreco() {
 		return preco;
 	}
 
-	public void setPreco(String preco) {
+	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
 
