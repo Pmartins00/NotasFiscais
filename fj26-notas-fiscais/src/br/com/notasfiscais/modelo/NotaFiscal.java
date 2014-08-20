@@ -1,6 +1,6 @@
 package br.com.notasfiscais.modelo;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,7 +20,7 @@ public class NotaFiscal {
 	private String cnpj;
 	
 	@Temporal(TemporalType.DATE)
-	private Calendar data;
+	private Date data;
 	
 	@OneToMany(cascade=CascadeType.PERSIST, mappedBy="notaFiscal")
 	private List<Item> itens;
@@ -41,11 +41,11 @@ public class NotaFiscal {
 		this.cnpj = cnpj;
 	}
 
-	public Calendar getData() {
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(Calendar data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 

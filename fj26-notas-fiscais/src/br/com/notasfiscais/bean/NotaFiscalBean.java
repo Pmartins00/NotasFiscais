@@ -1,6 +1,6 @@
 package br.com.notasfiscais.bean;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -12,11 +12,14 @@ import br.com.notasfiscais.modelo.Produto;
 
 @ManagedBean(name="notaFiscalBean")
 @ViewScoped
-public class NotaFiscalBean implements Serializable {
+public class NotaFiscalBean {
 	
 	private Item item = new Item();
 	private NotaFiscal notaFiscal = new NotaFiscal();
 	private Long idProduto;
+	private ArrayList<Item> lista = new ArrayList<Item>();
+	
+	
 	
 	public void guardaItem() {
 		
@@ -32,23 +35,32 @@ public class NotaFiscalBean implements Serializable {
 		this.item.setProduto(produto);
 		this.item.setValorUnitario(produto.getPreco());
 		
+		lista.add(item);
+		notaFiscal.setItens(lista);
+		
 		this.item.setNotaFiscal(notaFiscal);
-		this.notaFiscal.getItens().add(item);
+		
+		
+		
+		System.out.println("Tamanho: "+lista.size());
 		
 		this.item = new Item();
 		
 	}
 	
-	public void atribui() {
-		System.out.println("atribui");
-	}
-	
-	public void adiciona() {
+	public String adiciona() {
+		System.out.println("Dados da nota");
+		System.out.println("CNPJ: " + notaFiscal.getCnpj());
+		System.out.println("Data: " + notaFiscal.getData());
+		System.out.println("itens" + notaFiscal.getItens().size());
+		
 		DAO<NotaFiscal> dao = new DAO<NotaFiscal>(NotaFiscal.class);
 		dao.adiciona(notaFiscal);
 		
 		this.notaFiscal = new NotaFiscal();
 		this.item = new Item();
+		
+		return "notafiscal?faces-redirect=true";
 	}
 	
 	
@@ -79,7 +91,13 @@ public class NotaFiscalBean implements Serializable {
 	public void setIdProduto(Long idProduto) {
 		this.idProduto = idProduto;
 	}
-	
-	
+
+	public ArrayList<Item> getLista() {
+		return lista;
+	}
+
+	public void setLista(ArrayList<Item> lista) {
+		this.lista = lista;
+	}
 
 }

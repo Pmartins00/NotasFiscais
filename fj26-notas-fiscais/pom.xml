@@ -118,15 +118,9 @@
 	</dependency>
 	
 	<dependency>
-	<groupId>el-impl</groupId>
-		<artifactId>el-impl</artifactId>
-		<version>1.0</version>
-	</dependency>
-	
-	<dependency>
-		<groupId>commons-el</groupId>
-		<artifactId>commons-el</artifactId>
-		<version>1.0</version>
+		<groupId>org.primefaces</groupId>
+		<artifactId>primefaces</artifactId>
+		<version>5.0</version>
 	</dependency>
 	
 	
