@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:body>
 	
@@ -14,13 +15,15 @@
 		<center>
 			<h:form id="formlogin">
 				<h:panelGrid columns="2" styleClass="f2">
-					<h:outputLabel value="Login:"/>
-					<h:inputText value="#{loginBean.usuario.login}"/>
+					<p:outputLabel for="login" value="Login:"/>
+					<p:inputText id="login" value="#{loginBean.usuario.login}"/>
 					
-					<h:outputLabel value="Senha:"/>
-					<h:inputSecret value="#{loginBean.usuario.senha}"/>
+					<p:outputLabel for="senha" value="Senha:"/>
+					<p:inputText type="password" id="senha" value="#{loginBean.usuario.senha}"/>
 					
-					<h:commandButton value="Efetuar Login" action="#{loginBean.autentica}"/>
+					<p:outputLabel/>
+					
+					<p:commandButton value="Efetuar Login" action="#{loginBean.autentica}"/>
 					
 				</h:panelGrid>
 			</h:form>

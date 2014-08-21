@@ -49,8 +49,10 @@
 	background-color: #ccccff;
 	text-align: center;
 	color: #660066;
-	margin-top: 80px;
+	width: 99%;
 	height: 20px;
+	position: absolute;
+	bottom: 0;
 }
 
 .f2 {
@@ -62,7 +64,7 @@
 	padding: 10px;
 	margin: 100px;
 	font-family: sans-serif;
-	font-size: 20px;
+	font-size: 30px;
 }
 
 .b1{
@@ -72,14 +74,10 @@
 }
 
 .menu {
-	float: right;
-	background-color: #660066;
-	border-radius: 5px;
-	padding: 5px;
-	color: #FFFFFF;
+	background-color: #ccccff;
+	margin-bottom: 10px;
 }
 
 .menu:HOVER {
-	background-color: #ccccff;
-	color: #660066;
+	background-color: #ececec;
 }

@@ -25,10 +25,10 @@
 				<legend class="t">Dados da Nota</legend>
 				
 				<h:panelGrid columns="2">
-						<h:outputLabel value="CNPJ Cliente:" for="cnpj"/>
-						<h:inputText id="cnpj" value="#{notaFiscalBean.notaFiscal.cnpj}"/>
+						<p:outputLabel value="CNPJ Cliente:" for="cnpj"/>
+						<p:inputMask id="cnpj" value="#{notaFiscalBean.notaFiscal.cnpj}" mask="99.999.999/999-99" />
 						
-						<h:outputLabel value="Data:" for="data"/>
+						<p:outputLabel value="Data:" for="data"/>
 						<p:calendar pattern="dd/MM/yyyy" id="data" value="#{notaFiscalBean.notaFiscal.data}"/>
 				</h:panelGrid>		
 				</fieldset>
@@ -36,14 +36,14 @@
 				<fieldset class="f">
 					<legend class="t">Dados do Item</legend>
 					<h:panelGrid columns="2">
-					<h:outputLabel for="produto" value="Produto:"/>
-					<h:selectOneMenu id="produto" value="#{notaFiscalBean.idProduto}">
+					<p:outputLabel for="produto" value="Produto:"/>
+					<p:selectOneMenu id="produto" value="#{notaFiscalBean.idProduto}">
 						<f:selectItem itemLabel="Selecione Algum" itemValue="#{null}"/>
 						<f:selectItems value="#{produtoBean.produtos}" var="produto" itemValue="#{produto.id}" itemLabel="#{produto.nome}"/>
-					</h:selectOneMenu>
+					</p:selectOneMenu>
 					
-					<h:outputLabel for="quantidade" value="Quantidade:"/>
-					<h:inputText id="quantidade" value="#{notaFiscalBean.item.quantidade}"/>
+					<p:outputLabel for="quantidade" value="Quantidade:"/>
+					<p:inputText id="quantidade" value="#{notaFiscalBean.item.quantidade}"/>
 					
 					<h:commandButton  action="#{notaFiscalBean.guardaItem}" value="Guarda Item">
 						<f:ajax execute=":form2" render=":form2"/>
@@ -54,36 +54,32 @@
 		
 				
 				
-			
+			<h3 class="t">Itens da Nota</h3>
 		
 			<!-- Lista -->
-				<h:dataTable value="#{notaFiscalBean.lista}" var="item" styleClass="prod" rowClasses="par,impar">
+				<p:dataTable value="#{notaFiscalBean.lista}" var="item" styleClass="prod" rowClasses="par,impar">
 					
-					<h:column>
-						<f:facet name="header">Produto</f:facet>
+					<p:column headerText="Produto">
 						#{item.produto.nome}
-					</h:column>
+					</p:column>
 					
-					<h:column>
-						<f:facet name="header">Preço</f:facet>
+					<p:column headerText="Preço">
 						<h:outputText value="#{item.valorUnitario}">
 							<f:convertNumber pattern="RS #0.00"/>
 						</h:outputText>
-					</h:column>
+					</p:column>
 					
-					<h:column>
-						<f:facet name="header">Quantidade</f:facet>
+					<p:column headerText="Quantidade">
 						#{item.quantidade}
-					</h:column>
+					</p:column>
 					
-					<h:column>
-						<f:facet name="header">Valor Total</f:facet>
+					<p:column headerText="Valor Total">
 						<h:outputText value="#{item.total()}">
 							<f:convertNumber pattern="RS #0.00"/>
 						</h:outputText>
-					</h:column>
+					</p:column>
 					
-				</h:dataTable>
+				</p:dataTable>
 			
 			<h:commandButton action="#{notaFiscalBean.adiciona}" value="Salvar Venda">
 					
