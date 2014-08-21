@@ -21,12 +21,17 @@
 		<h:graphicImage styleClass="logo" library="imagens" name="logo.png"/>
 		<span>UBERDIST</span>
 		<span class="b1">Logado como: #{loginBean.usuario.login}</span>
+		
 		<h:form>
-			<h:commandButton styleClass="menu" value="Logout" action="#{loginBean.logout}"/>
-			<h:commandButton styleClass="menu" value="Manter Usuários" action="#{usuarioBean.page}"/>
-			<h:commandButton styleClass="menu" value="Manter Notas Fiscais" action="#{notaFiscalBean.page}"/>
-			<h:commandButton styleClass="menu" value="Manter Produtos" action="#{produtoBean.page}"/>
+			<p:menubar styleClass="menu">
+				<p:menuitem value="Manter Produtos" url="index.xhtml"/>
+				<p:menuitem value="Manter Usuários" url="usuario.xhtml"/>
+				<p:menuitem value="Manter Notas Fiscais" url="notafiscal.xhtml"/>
+				<p:menuitem value="Consultar Notas Fiscais" url="notasfiscais.xhtml"/>
+				<p:menuitem value="Logout" action="#{loginBean.logout}"/>
+			</p:menubar>
 		</h:form>
+		
 	</div>
 	
 	<div id="conteudo">

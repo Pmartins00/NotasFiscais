@@ -67,6 +67,33 @@ public class DAO<T> {
 		return lista;
 	}
 	
+	public List<T> listaTodosPaginada(int inicio, int quantidade) {
+		
+		EntityManager em = new JPAUtil().getEntityManager();
+		
+		CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(classe);
+		query.select(query.from(classe));
+		
+		
+		List<T> lista = em.createQuery(query).setFirstResult(inicio).setMaxResults(quantidade).getResultList();
+		
+		em.close();
+		return lista;
+	}
+	
+	public int contaTodos() {
+		
+		EntityManager em = new JPAUtil().getEntityManager();
+		
+		CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(classe);
+		query.select(query.from(classe));
+		
+		List<T> lista = em.createQuery(query).getResultList();
+		
+		em.close();
+		return lista.size();
+	}
+	
 	public T buscaporId(Long id) {
 		EntityManager em = new JPAUtil().getEntityManager();
 		return (T) em.find(classe, id);
