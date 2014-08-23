@@ -40,11 +40,10 @@ public class NotaFiscalBean {
 		
 		this.item.setNotaFiscal(notaFiscal);
 		
-		
-		
 		System.out.println("Tamanho: "+lista.size());
 		
 		this.item = new Item();
+		idProduto=null;
 		
 	}
 	

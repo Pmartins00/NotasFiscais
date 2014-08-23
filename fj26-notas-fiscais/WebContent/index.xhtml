@@ -13,16 +13,11 @@
 		<ui:define name="titulo">Manter Produtos</ui:define>
 	
 		<ui:define name="corpo">
-		
-			<fieldset class="f">
 			
-				<legend class="t">
-					<h:outputText value="Novo Produto" rendered="#{empty produtoBean.produto.id}"/>
-					<h:outputText value="Editar Produto" rendered="#{not empty produtoBean.produto.id}"/>	
-				</legend>
+			<p:fieldset class="f" legend="Produto">
 		
 				<h:form id="form1">
-				
+				<h:messages/>
 					<h:panelGrid columns="2">
 						
 						<p:outputLabel value="Nome:" for="nome"/>
@@ -34,19 +29,20 @@
 						<p:outputLabel value="Preço:" for="preco"/>
 						<p:inputText id="preco" value="#{produtoBean.produto.preco}"/>
 						
-						<h:commandButton action="#{produtoBean.grava}" value="Gravar">
-							<f:ajax execute="@form" render="@form :lista"/>
-						</h:commandButton>
+						<p:outputLabel/>
+						<p:commandButton update=":lista @form" actionListener="#{produtoBean.grava}" value="Gravar">
+							<f:ajax execute="@form"/>
+						</p:commandButton>
 						
 					</h:panelGrid>
 					
 				</h:form>
-			</fieldset>
+			</p:fieldset>
 			
 			<h3 class="t">Lista de Produtos</h3>
 			
 			<h:form id="lista">
-				<p:dataTable value="#{produtoBean.produtos}" styleClass="prod" var="produto" rowClasses="par, impar">
+				<p:dataTable paginator="true" rows="5" lazy="true" paginatorPosition="bottom" emptyMessage="Nenhum produto cadastrado!" value="#{produtoBean.dataModel}" styleClass="prod" var="produto" rowClasses="par, impar">
 					
 					<p:column headerText="Id">
 						#{produto.id}
@@ -57,7 +53,9 @@
 					</p:column>
 					
 					<p:column headerText="Descrição">
-						#{produto.descricao}
+					
+						<h:outputText escape="false" value="#{produto.descricao}"/>
+						
 					</p:column>
 					
 					<p:column headerText="Preço">
@@ -65,7 +63,7 @@
 					</p:column>
 					
 					<p:column headerText="Ações">
-						<h:commandLink action="#{produtoBean.remove(produto)}" value="Remover"><f:ajax render="@form" /></h:commandLink>
+						<h:commandLink update="@form" action="#{produtoBean.remove(produto)}" value="Remover"><f:ajax render="@form" /></h:commandLink>
 					</p:column>
 					
 					<p:column headerText="Alterar">

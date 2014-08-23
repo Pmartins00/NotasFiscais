@@ -15,11 +15,12 @@
 		<center>
 			<h:form id="formlogin">
 				<h:panelGrid columns="2" styleClass="f2">
+				
 					<p:outputLabel for="login" value="Login:"/>
 					<p:inputText id="login" value="#{loginBean.usuario.login}"/>
 					
 					<p:outputLabel for="senha" value="Senha:"/>
-					<p:inputText type="password" id="senha" value="#{loginBean.usuario.senha}"/>
+					<p:keyboard password="true" id="senha" value="#{loginBean.usuario.senha}"/>
 					
 					<p:outputLabel/>
 					

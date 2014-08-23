@@ -9,7 +9,7 @@
 
 <ui:composition template="/WEB-INF/templates/_template2.xhtml">
 	<ui:define name="titulo">
-	    Manter Vendas
+	    Consultar Notas Fiscais
 	</ui:define>
 	
 	<ui:define name="corpo">
@@ -17,14 +17,16 @@
 			<h3 class="t">Notas Fiscais</h3>
 		
 			<!-- Lista -->
-			<p:dataTable lazy="true" paginator="true" rows="5" value="#{listaNotasFiscaisBean.dataModel}" var="nf" styleClass="prod" rowClasses="par,impar">
+			<p:dataTable paginatorPosition="bottom" emptyMessage="Nenhuma nota cadastrada!" lazy="true" paginator="true" rows="5" value="#{listaNotasFiscaisBean.dataModel}" var="nf" styleClass="prod" rowClasses="par,impar">
 				
 				<p:column headerText="CNPJ">
 					#{nf.cnpj}	
 				</p:column>
 				
 				<p:column headerText="Data">
-					#{nf.data}
+					<h:outputText value="#{nf.data}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
 				</p:column>
 				
 			</p:dataTable>

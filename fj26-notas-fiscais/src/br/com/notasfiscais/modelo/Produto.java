@@ -4,14 +4,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 public class Produto {
 	
 	@Id @GeneratedValue
 	private Long id;
 	
+	@NotEmpty(message="O campo nome deve ser preenchido!")
 	private String nome;
 	
+	@NotEmpty(message="O campo descrição deve ser preenchido!")
 	private String descricao;
 	
 	private Double preco;

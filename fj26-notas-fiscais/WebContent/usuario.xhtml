@@ -14,12 +14,7 @@
 		
 		<ui:define name="corpo">
 		
-			<fieldset class="f">
-		
-				<legend class="t">
-					<h:outputText value="Novo Usuário" rendered="#{empty produtoBean.produto.id}"/>
-					<h:outputText value="Editar Usuário" rendered="#{not empty produtoBean.produto.id}"/>	
-				</legend>
+			<p:fieldset class="f" legend="Usuário">
 		
 				<h:form id="form1">
 				
@@ -31,14 +26,15 @@
 						<p:outputLabel value="Senha:" for="senha"/>
 						<p:inputTextarea id="senha" value="#{usuarioBean.usuario.senha}"/>
 						
-						<h:commandButton action="#{usuarioBean.grava}" value="Gravar">
+						<p:outputLabel/>
+						<p:commandButton update=":lista @form" action="#{usuarioBean.grava}" value="Gravar">
 							<f:ajax execute="@form" render="@form :lista"/>
-						</h:commandButton>
+						</p:commandButton>
 						
 					</h:panelGrid>
 					
 				</h:form>
-			</fieldset>
+			</p:fieldset>
 			
 			<h3 class="t">Lista de Usuários</h3>
 			

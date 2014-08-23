@@ -13,83 +13,84 @@
 	</ui:define>
 	
 	<ui:define name="corpo">
-				
-			<h:form id="form2">
-			<!-- Dados do Item -->
 			
-				
-				
+		<h:form id="form1">
+			<h:messages/>
 			
 			
-				<fieldset class="f">
-				<legend class="t">Dados da Nota</legend>
+			<p:tabView>
+				<p:tab title="Nota Fiscal">
 				
-				<h:panelGrid columns="2">
-						<p:outputLabel value="CNPJ Cliente:" for="cnpj"/>
-						<p:inputMask id="cnpj" value="#{notaFiscalBean.notaFiscal.cnpj}" mask="99.999.999/999-99" />
+						<!-- Dados do Item -->
 						
-						<p:outputLabel value="Data:" for="data"/>
-						<p:calendar pattern="dd/MM/yyyy" id="data" value="#{notaFiscalBean.notaFiscal.data}"/>
-				</h:panelGrid>		
-				</fieldset>
+						<p:fieldset legend="Dados da Nota" styleClass="f">
+						<h:panelGrid columns="2">
+								<p:outputLabel value="CNPJ Cliente:" for="cnpj"/>
+								<p:inputMask id="cnpj" value="#{notaFiscalBean.notaFiscal.cnpj}" mask="99.999.999/9999-99" />
+								
+								<p:outputLabel value="Data:" for="data"/>
+								<p:calendar mask="99/99/9999" pattern="dd/MM/yyyy" id="data" value="#{notaFiscalBean.notaFiscal.data}"/>
+						</h:panelGrid>		
 						
-				<fieldset class="f">
-					<legend class="t">Dados do Item</legend>
-					<h:panelGrid columns="2">
-					<p:outputLabel for="produto" value="Produto:"/>
-					<p:selectOneMenu id="produto" value="#{notaFiscalBean.idProduto}">
-						<f:selectItem itemLabel="Selecione Algum" itemValue="#{null}"/>
-						<f:selectItems value="#{produtoBean.produtos}" var="produto" itemValue="#{produto.id}" itemLabel="#{produto.nome}"/>
-					</p:selectOneMenu>
+						</p:fieldset>
 					
-					<p:outputLabel for="quantidade" value="Quantidade:"/>
-					<p:inputText id="quantidade" value="#{notaFiscalBean.item.quantidade}"/>
-					
-					<h:commandButton  action="#{notaFiscalBean.guardaItem}" value="Guarda Item">
-						<f:ajax execute=":form2" render=":form2"/>
-					</h:commandButton>
-					</h:panelGrid>
-				</fieldset>
-						
-		
+				</p:tab>
 				
-				
-			<h3 class="t">Itens da Nota</h3>
-		
-			<!-- Lista -->
-				<p:dataTable value="#{notaFiscalBean.lista}" var="item" styleClass="prod" rowClasses="par,impar">
-					
-					<p:column headerText="Produto">
-						#{item.produto.nome}
-					</p:column>
-					
-					<p:column headerText="Preço">
-						<h:outputText value="#{item.valorUnitario}">
-							<f:convertNumber pattern="RS #0.00"/>
-						</h:outputText>
-					</p:column>
-					
-					<p:column headerText="Quantidade">
-						#{item.quantidade}
-					</p:column>
-					
-					<p:column headerText="Valor Total">
-						<h:outputText value="#{item.total()}">
-							<f:convertNumber pattern="RS #0.00"/>
-						</h:outputText>
-					</p:column>
-					
-				</p:dataTable>
+				<p:tab id="i2" title="Itens da Nota">
+							
+						<p:fieldset class="f" legend="Dados do Item">
+							
+							<h:panelGrid columns="2">
+							<p:outputLabel for="produto" value="Produto:"/>
+							<p:selectOneMenu style="width:1100px;" id="produto" value="#{notaFiscalBean.idProduto}">
+								<f:selectItem itemLabel="Selecione Algum" itemValue="#{null}"/>
+								<f:selectItems value="#{produtoBean.produtos}" var="produto" itemValue="#{produto.id}" itemLabel="#{produto.nome}"/>
+							</p:selectOneMenu>
+							
+							<p:outputLabel for="quantidade" value="Quantidade:"/>
+							<p:inputText id="quantidade" value="#{notaFiscalBean.item.quantidade}"/>
+							
+							<p:outputLabel/>
+							<p:commandButton update="@form"  action="#{notaFiscalBean.guardaItem}" value="Guarda Item">
+								<f:ajax execute="@form" render="@form"/>
+							</p:commandButton>
+							</h:panelGrid>
+						</p:fieldset>
+								
+					<h3 class="t">Itens da Nota</h3>
 			
-			<h:commandButton action="#{notaFiscalBean.adiciona}" value="Salvar Venda">
-					
-			</h:commandButton>
-			
-			</h:form>
-			
-			
-			
-		
+						<!-- Lista -->
+						<p:dataTable emptyMessage="Nenhum Item adicionado!" value="#{notaFiscalBean.lista}" var="item" styleClass="prod" rowClasses="par,impar">
+							
+							<p:column headerText="Produto">
+								#{item.produto.nome}
+							</p:column>
+							
+							<p:column headerText="Preço">
+								<h:outputText value="#{item.valorUnitario}">
+									<f:convertNumber pattern="RS #0.00"/>
+								</h:outputText>
+							</p:column>
+							
+							<p:column headerText="Quantidade">
+								#{item.quantidade}
+							</p:column>
+							
+							<p:column headerText="Valor Total">
+								<h:outputText value="#{item.total()}">
+									<f:convertNumber pattern="RS #0.00"/>
+								</h:outputText>
+							</p:column>
+							
+						</p:dataTable>
+						<br/>
+						<p:commandButton action="#{notaFiscalBean.adiciona}" value="Salvar Venda">
+							<f:ajax execute="@form" render="@form"/>
+						</p:commandButton>
+				</p:tab>
+			</p:tabView>
+		</h:form>
+	
 	</ui:define>
 	
 </ui:composition>

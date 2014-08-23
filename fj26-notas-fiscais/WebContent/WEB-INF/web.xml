@@ -10,6 +10,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -20,4 +21,18 @@
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
 
+	<filter> 
+		<filter-name>primeUploadFilter</filter-name> 
+		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+	</filter> 
+	
+	<filter-mapping> 
+		<filter-name>primeUploadFilter</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+	</filter-mapping>
+	
+	<listener>
+    	<listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
+  	</listener>
+  	
 </web-app>
